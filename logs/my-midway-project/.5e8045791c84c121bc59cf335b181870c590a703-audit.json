@@ -1,0 +1,15 @@
+{
+  "keep": {
+    "days": true,
+    "amount": 31
+  },
+  "auditLog": "/Users/chenxuanfeng/mydata/midway-web/logs/my-midway-project/.5e8045791c84c121bc59cf335b181870c590a703-audit.json",
+  "files": [
+    {
+      "date": 1648304521173,
+      "name": "/Users/chenxuanfeng/mydata/midway-web/logs/my-midway-project/common-error.log.2022-03-26",
+      "hash": "a5fe757deec867d228fcd05c6fcc9716"
+    }
+  ],
+  "hashType": "md5"
+}
