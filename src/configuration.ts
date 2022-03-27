@@ -1,16 +1,31 @@
 import { Configuration, App } from '@midwayjs/decorator';
-import { Application } from '@midwayjs/koa';
-import * as bodyParser from 'koa-bodyparser';
+import * as koa from '@midwayjs/koa';
+import * as validate from '@midwayjs/validate';
+import * as info from '@midwayjs/info';
+import { join } from 'path';
+// import { DefaultErrorFilter } from './filter/default.filter';
+// import { NotFoundFilter } from './filter/notfound.filter';
+import { ReportMiddleware } from './middleware/report.middleware';
 
 @Configuration({
-  conflictCheck: true,
+  imports: [
+    koa,
+    validate,
+    {
+      component: info,
+      enabledEnvironment: ['local'],
+    },
+  ],
+  importConfigs: [join(__dirname, './config')],
 })
 export class ContainerLifeCycle {
   @App()
-  app: Application;
+  app: koa.Application;
 
   async onReady() {
-    // bodyparser options see https://github.com/koajs/bodyparser
-    this.app.use(bodyParser());
+    // add middleware
+    this.app.useMiddleware([ReportMiddleware]);
+    // add filter
+    // this.app.useFilter([NotFoundFilter, DefaultErrorFilter]);
   }
 }

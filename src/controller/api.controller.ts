@@ -1,8 +1,7 @@
-import { Inject, Controller, Post, Provide, Query } from '@midwayjs/decorator';
+import { Inject, Controller, Get, Query } from '@midwayjs/decorator';
 import { Context } from '@midwayjs/koa';
-import { UserService } from '../service/user';
+import { UserService } from '../service/user.service';
 
-@Provide()
 @Controller('/api')
 export class APIController {
   @Inject()
@@ -11,8 +10,8 @@ export class APIController {
   @Inject()
   userService: UserService;
 
-  @Post('/get_user')
-  async getUser(@Query() uid) {
+  @Get('/get_user')
+  async getUser(@Query('uid') uid) {
     const user = await this.userService.getUser({ uid });
     return { success: true, message: 'OK', data: user };
   }
